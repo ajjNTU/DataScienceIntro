@@ -5,6 +5,11 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, matthews_corrcoef, accuracy_score, precision_recall_fscore_support
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+from sklearn.naive_bayes import GaussianNB
+from sklearn.neural_network import MLPClassifier
 
 # Load the dataset from the provided URL
 url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/covtype/covtype.data.gz'
@@ -63,6 +68,131 @@ y_pred = rf.predict(X_test)
 
 # Evaluate the classifier performance
 print("Random Forest Results:")
+print(classification_report(y_test, y_pred))
+
+mcc = matthews_corrcoef(y_test, y_pred)
+accuracy = accuracy_score(y_test, y_pred)
+precision, recall, f1_score, _ = precision_recall_fscore_support(y_test, y_pred, average='weighted')
+
+print("MCC:", mcc)
+print("Accuracy:", accuracy)
+print("Precision:", precision)
+print("Recall:", recall)
+print("F1-score:", f1_score)
+
+
+# Initialize the Decision Tree classifier
+dt = DecisionTreeClassifier(random_state=42)
+
+# Train the classifier
+dt.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred = dt.predict(X_test)
+
+# Evaluate the classifier performance
+print("Decision Tree Results:")
+print(classification_report(y_test, y_pred))
+
+mcc = matthews_corrcoef(y_test, y_pred)
+accuracy = accuracy_score(y_test, y_pred)
+precision, recall, f1_score, _ = precision_recall_fscore_support(y_test, y_pred, average='weighted')
+
+print("MCC:", mcc)
+print("Accuracy:", accuracy)
+print("Precision:", precision)
+print("Recall:", recall)
+print("F1-score:", f1_score)
+
+
+
+# Initialize the logistic regression classifier
+log_reg = LogisticRegression(random_state=42)
+
+# Train the classifier
+log_reg.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred = log_reg.predict(X_test)
+
+# Evaluate the classifier performance
+print("Logistic Regression Results:")
+print(classification_report(y_test, y_pred))
+
+mcc = matthews_corrcoef(y_test, y_pred)
+accuracy = accuracy_score(y_test, y_pred)
+precision, recall, f1_score, _ = precision_recall_fscore_support(y_test, y_pred, average='weighted')
+
+print("MCC:", mcc)
+print("Accuracy:", accuracy)
+print("Precision:", precision)
+print("Recall:", recall)
+print("F1-score:", f1_score)
+
+
+
+# Initialize the SVM classifier
+svm = SVC(random_state=42)
+
+# Train the classifier
+svm.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred = svm.predict(X_test)
+
+# Evaluate the classifier performance
+print("Support Vector Machines Results:")
+print(classification_report(y_test, y_pred))
+
+mcc = matthews_corrcoef(y_test, y_pred)
+accuracy = accuracy_score(y_test, y_pred)
+precision, recall, f1_score, _ = precision_recall_fscore_support(y_test, y_pred, average='weighted')
+
+print("MCC:", mcc)
+print("Accuracy:", accuracy)
+print("Precision:", precision)
+print("Recall:", recall)
+print("F1-score:", f1_score)
+
+
+
+
+# Initialize the Gaussian Naive Bayes classifier
+gnb = GaussianNB()
+
+# Train the classifier
+gnb.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred = gnb.predict(X_test)
+
+# Evaluate the classifier performance
+print("Gaussian Naive Bayes Results:")
+print(classification_report(y_test, y_pred))
+
+mcc = matthews_corrcoef(y_test, y_pred)
+accuracy = accuracy_score(y_test, y_pred)
+precision, recall, f1_score, _ = precision_recall_fscore_support(y_test, y_pred, average='weighted')
+
+print("MCC:", mcc)
+print("Accuracy:", accuracy)
+print("Precision:", precision)
+print("Recall:", recall)
+print("F1-score:", f1_score)
+
+
+
+# Initialize the Multi-layer Perceptron classifier
+mlp = MLPClassifier(random_state=42)
+
+# Train the classifier
+mlp.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred = mlp.predict(X_test)
+
+# Evaluate the classifier performance
+print("Multi-layer Perceptron Results:")
 print(classification_report(y_test, y_pred))
 
 mcc = matthews_corrcoef(y_test, y_pred)
