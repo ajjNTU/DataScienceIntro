@@ -7,7 +7,6 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, matthews_corrcoef, accuracy_score, precision_recall_fscore_support
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
-from sklearn.svm import SVC
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neural_network import MLPClassifier
 
@@ -42,7 +41,7 @@ knn.fit(X_train, y_train)
 y_pred = knn.predict(X_test)
 
 # Evaluate the classifier performance
-print("k-Nearest Neighbors Results:")
+print("5-Nearest Neighbors Results:")
 print(classification_report(y_test, y_pred))
 
 mcc = matthews_corrcoef(y_test, y_pred)
@@ -107,7 +106,7 @@ print("F1-score:", f1_score)
 
 
 # Initialize the logistic regression classifier
-log_reg = LogisticRegression(random_state=42)
+log_reg = LogisticRegression(random_state=42, max_iter=1000)
 
 # Train the classifier
 log_reg.fit(X_train, y_train)
@@ -129,30 +128,6 @@ print("Precision:", precision)
 print("Recall:", recall)
 print("F1-score:", f1_score)
 
-
-
-# Initialize the SVM classifier
-svm = SVC(random_state=42)
-
-# Train the classifier
-svm.fit(X_train, y_train)
-
-# Make predictions on the test set
-y_pred = svm.predict(X_test)
-
-# Evaluate the classifier performance
-print("Support Vector Machines Results:")
-print(classification_report(y_test, y_pred))
-
-mcc = matthews_corrcoef(y_test, y_pred)
-accuracy = accuracy_score(y_test, y_pred)
-precision, recall, f1_score, _ = precision_recall_fscore_support(y_test, y_pred, average='weighted')
-
-print("MCC:", mcc)
-print("Accuracy:", accuracy)
-print("Precision:", precision)
-print("Recall:", recall)
-print("F1-score:", f1_score)
 
 
 
