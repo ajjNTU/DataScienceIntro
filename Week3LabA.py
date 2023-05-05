@@ -3,6 +3,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split, StratifiedShuffleSplit
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, matthews_corrcoef, accuracy_score, precision_recall_fscore_support
 
 # Load the dataset from the provided URL
@@ -37,6 +38,31 @@ y_pred = knn.predict(X_test)
 
 # Evaluate the classifier performance
 print("k-Nearest Neighbors Results:")
+print(classification_report(y_test, y_pred))
+
+mcc = matthews_corrcoef(y_test, y_pred)
+accuracy = accuracy_score(y_test, y_pred)
+precision, recall, f1_score, _ = precision_recall_fscore_support(y_test, y_pred, average='weighted')
+
+print("MCC:", mcc)
+print("Accuracy:", accuracy)
+print("Precision:", precision)
+print("Recall:", recall)
+print("F1-score:", f1_score)
+
+
+
+# Initialize the Random Forest classifier
+rf = RandomForestClassifier(random_state=42)
+
+# Train the classifier
+rf.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred = rf.predict(X_test)
+
+# Evaluate the classifier performance
+print("Random Forest Results:")
 print(classification_report(y_test, y_pred))
 
 mcc = matthews_corrcoef(y_test, y_pred)
