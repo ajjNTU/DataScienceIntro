@@ -4,11 +4,14 @@ from sklearn.model_selection import train_test_split, StratifiedShuffleSplit
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report, matthews_corrcoef, accuracy_score, precision_recall_fscore_support
+from sklearn.metrics import classification_report, matthews_corrcoef, accuracy_score, precision_recall_fscore_support, \
+    confusion_matrix
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neural_network import MLPClassifier
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 
@@ -69,6 +72,18 @@ for clf, name in classifiers:
                                                 "Precision": [precision],
                                                 "Recall": [recall],
                                                 "F1-score": [f1_score]})], ignore_index=True)
+
+    # Plot confusion Matrix
+    cm = confusion_matrix(y_test, y_pred)
+
+    # confusion matrix visualization
+    f, ax = plt.subplots(figsize=(5, 5))
+    sns.heatmap(cm, annot=True, linewidths=0.5, linecolor="red", fmt=".0f", ax=ax)
+    plt.xlabel("y_pred")
+    plt.ylabel("y_true")
+    plt.title(f"{clf}")
+    plt.show()
+
 # Assign weights to each metric
 weights = {"MCC": 1, "Accuracy": 1, "Precision": 2, "Recall": 2, "F1-score": 2}
 
